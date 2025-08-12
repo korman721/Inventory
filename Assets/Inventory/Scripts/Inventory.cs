@@ -19,9 +19,12 @@ public class Inventory
     {
         foreach (InventoryCell cell in _inventoryCells)
             if (cell.IsOccupied == true && cell.ReadOnlyItem.ID != item.ID)
-                return;
+                Debug.Log("Cell Occcupied");
             else
-                cell.AddItem(item);
+                if (cell.TryAddItem(item))
+                    return;
+
+        Debug.Log("All Cells Occupied");
     }
 
     public Item GetItemBy(int id)

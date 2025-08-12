@@ -12,19 +12,24 @@ public class InventoryCell
 
     public bool IsOccupied => _item != null;
 
-    public void AddItem(Item item)
+    public bool TryAddItem(Item item)
     {
         if (_item.ID == item.ID)
         {
             if (_item.TryAddToStack(item.Stack))
+            {
                 Debug.Log("Add To Stack Complete");
+                return true;
+            }
             else
+            {
                 Debug.Log("Add To Stack Not Work");
-
-            return;
+                return false;
+            }
         }
 
         _item = item;
+        return true;
     }
 
     public Item GetItem()
